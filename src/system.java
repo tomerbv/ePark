@@ -12,21 +12,25 @@ public class system {
         systemObjects.add((Object) g);
     }
 
-    void createChild(Guardian g, int idNumber, int age){
+    public Child createChild(Guardian g, int idNumber, int age){
         Child child = g.registerChild( idNumber,  age);
         systemObjects.add((Object) child);
+        return child;
     }
 
-    boolean isCardValid(String creditCard){
+    boolean isCardValid(int creditCard){
         return true;
     }
 
-    void createTicket(Guardian guardian, Child child, String creditCard){
+    e_Ticket createTicket(Guardian guardian, Child child, int creditCard){
         e_Ticket ticket = new e_Ticket(creditCard);
         child.setTicket(ticket);
         systemObjects.add((Object) ticket);
+        return ticket;
 
     }
+
+
 
     void measurementsUpdate(Child child, double height, double weight){
         child.setValues(height,weight);

@@ -1,14 +1,70 @@
 import java.util.Scanner;
 
 public class Main {
+
+    private static String getStrInput(Scanner input, String print){
+        System.out.println(print);
+        String str = input.nextLine();
+
+        while(str.length() == 0){
+            System.out.println(print);
+            str = input.nextLine();
+        }
+
+        return str;
+    }
+
+    private static int getIntInput(Scanner input,String print){
+        System.out.println(print);
+        String str = input.nextLine();
+        int res;
+        try{
+            res = Integer.parseInt(str);
+        }
+        catch (NumberFormatException nfe){
+            System.out.println("Invalid Input");
+            return getIntInput(input,print);
+        }
+        return res;
+    }
+
+    private static double getDoubleInput(Scanner input, String print){
+        System.out.println(print + "\n");
+        String str = input.nextLine();
+        double res;
+        try{
+            res = Double.parseDouble(str);
+        }
+        catch (NumberFormatException nfe){
+            System.out.println("Invalid Input");
+            return getIntInput(input,print);
+        }
+        return res;
+
+    }
+
+
     public static void main(String[] args) {
         /**
          *
          *
          */
-        //system MySystem = new system();
+
+
+        system MySystem = new system();
+
+        Guardian guardian = new Guardian();
         System.out.println("Welcome to ePark !\n");
         Scanner input = new Scanner(System.in);
+        int ID;
+        int age;
+        double height;
+        double weight;
+        int creditCard;
+
+
+
+
         int choice;
         while (true) {
             System.out.println("1.  Register child ;-) ");
@@ -24,9 +80,21 @@ public class Main {
             switch (choice) {
 
                 case 1:
-                    /*
-                     * Register child
-                     */
+
+
+                    ID = getIntInput(input, "Please enter your child's ID");
+                    age = getIntInput(input, "Please enter your child's age");
+                    Child child = MySystem.createChild(guardian, ID, age);
+
+                    creditCard = getIntInput(input, "Please enter your credit card number");
+                    MySystem.isCardValid(creditCard);
+
+                    e_Ticket ticket = MySystem.createTicket(guardian, child, creditCard);
+
+                    height = getDoubleInput(input, "Please enter your child's height");
+                    weight = getDoubleInput(input, "Please enter your child's weight");
+                    MySystem.measurementsUpdate(child, height, weight);
+
                     break;
 
                 case 2:

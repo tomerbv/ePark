@@ -4,10 +4,10 @@ public class e_Ticket {
     double height;
     double weight;
     int age;
-    String creditCard;
+    int creditCard;
     ArrayList<Device> devices;
 
-    public e_Ticket(String creditCard) {
+    public e_Ticket(int creditCard) {
         this.creditCard = creditCard;
     }
 
