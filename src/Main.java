@@ -48,6 +48,69 @@ public class Main {
 
     }
 
+    private static void addRide(Scanner input, Guardian guardian, system MySystem, Child child){
+        ArrayList<Device> relaventDevices = MySystem.getRelevantDevices(child);
+        if (relaventDevices == null || relaventDevices.size() == 0){
+            System.out.println("No relevant rides available for this child");
+            return;
+        }
+        System.out.println("Choose the ride you would like to add by number");
+        for (int i = 0; i < relaventDevices.size(); i++) {
+            System.out.println((i+1) + ". " + relaventDevices.get(i).getName() + ", Price: " + relaventDevices.get(i).getPrice());
+        }
+        int num;
+        while(true){
+            num = input.nextInt();
+            if(num > 0 && num <= relaventDevices.size())
+                break;
+            else
+                System.out.println("Invalid Input, please try again");
+        }
+        Device device = relaventDevices.get(num - 1);
+        if(guardian.childContainsDevice(device, child))
+            System.out.println("Device already on eCard");
+
+        else if(device.isExtreme){
+            String yesNo = getStrInput(input,"This device is classified as Extreme are you sure your kid can handle that shit?" +
+                    "\nType \"Y\" to continue or anything else if you believe your child is a little bitch");
+            if(yesNo.toLowerCase() != "y"){
+                System.out.println("Action cancelled");
+            }
+        }
+
+        else if(!guardian.addDevice(device, child)){
+            System.out.println("Insufficient credits on this child's eCard\nCurrent balance: " + guardian.getCreditBalance(child));
+        }
+
+        else{
+            System.out.println("Ride added successfully");
+        }
+    }
+
+    private static void removeRide(Scanner input, Guardian guardian, system MySystem, Child child){
+        ArrayList<Device> relaventDevices = MySystem.getChildsDevices(child);
+        if (relaventDevices == null || relaventDevices.size() == 0){
+            System.out.println("No relevant rides available for this child");
+            return;
+        }
+        System.out.println("Choose the ride you would like to remove by number");
+        for (int i = 0; i < relaventDevices.size(); i++) {
+            System.out.println((i+1) + ". " + relaventDevices.get(i).getName());
+        }
+        int num;
+        while(true){
+            num = input.nextInt();
+            if(num > 0 && num <= relaventDevices.size())
+                break;
+            else
+                System.out.println("Invalid Input, please try again");
+        }
+        Device device = relaventDevices.get(num - 1);
+        if(guardian.removeDevice(device, child));
+        System.out.println("Ride removed successfully");
+
+    }
+
 
     public static void main(String[] args) {
         /**
@@ -80,9 +143,9 @@ public class Main {
 
         int choice;
         while (true) {
-            System.out.println("1.  Register child ;-) ");
+            System.out.println("1.  Register child");
             System.out.println("2.  Manage ticket");
-            System.out.println("3.  Add ride(on device ya bad boy)");
+            System.out.println("3.  Add ride");
             System.out.println("4.  Remove ride");
             System.out.println("5.  Exit park");
             System.out.println("6.  Exit");
@@ -99,7 +162,8 @@ public class Main {
                         if(guardian.hasId(ID)){
                             System.out.println("ID already exists, try again");
                         }
-                        break;
+                        else
+                            break;
                     }
                     age = getIntInput(input, "Please enter your child's age");
                     child = MySystem.createChild(guardian, ID, age);
@@ -117,72 +181,57 @@ public class Main {
                     break;
 
                 case 2:
-                    /*
-                     * Manage ticket
-                     */
-                    break;
-
-                case 3:
                     ID = getIntInput(input, "Please enter your child's ID");
                     child = guardian.getChild(ID);
                     if (child == null) {
                         System.out.println("No such child ID exists in the system");
                         break;
                     }
-                    relaventDevices = MySystem.getRelevantDevices(child);
-                    if (relaventDevices == null || relaventDevices.size() == 0){
-                        System.out.println("No relevant rides available for this child");
+                    ticket = child.getTicket();
+                    System.out.println(ticket.fancyPrint());
+                    System.out.println("What action would you like to do today sir?");
+                    System.out.println("1.  Add ride ");
+                    System.out.println("2.  Remove ride");
+                    System.out.println("3.  Never mind, forgot I dont even have a child");
+                    choice = input.nextInt();
+                    switch (choice) {
+                        case 1:
+                            addRide( input,  guardian,  MySystem, child);
+                            break;
+                        case 2:
+                            removeRide( input,  guardian,  MySystem, child);
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            System.out.println("Invalid Input, please try again");
+                            break;
+                    }
+                    break;
+
+
+
+                case 3:
+
+                    ID = getIntInput(input, "Please enter your child's ID");
+                    child = guardian.getChild(ID);
+                    if (child == null) {
+                        System.out.println("No such child ID exists in the system");
                         break;
                     }
-                    System.out.println("Choose the ride you would like to add by number");
-                    for (int i = 0; i < relaventDevices.size(); i++) {
-                        System.out.println((i+1) + ". " + relaventDevices.get(i).getName());
-                    }
-                    while(true){
-                        ID = input.nextInt();
-                        if(ID > 0 && ID <= relaventDevices.size())
-                            break;
-                        else
-                            System.out.println("Invalid Input, please try again");
-                    }
-                    device = relaventDevices.get(ID - 1);
-                    if(guardian.childContainsDevice(device, child))
-                        System.out.println("Device already on eCard");
-                    else if(!guardian.addDevice(device, child)){
-                        System.out.println("Insufficient credits on this child's eCard\nCurrent balance: " + guardian.getCreditBalance(child));
-                    }
-                    else{
-                        System.out.println("Ride added successfully");
-                    }
+                    addRide( input,  guardian,  MySystem, child);
                     break;
 
 
                 case 4:
+
                     ID = getIntInput(input, "Please enter your child's ID");
                     child = guardian.getChild(ID);
                     if (child == null) {
                         System.out.println("No such child ID exists in the system");
                         break;
                     }
-                    relaventDevices = MySystem.getChildsDevices(child);
-                    if (relaventDevices == null || relaventDevices.size() == 0){
-                        System.out.println("No relevant rides available for this child");
-                        break;
-                    }
-                    System.out.println("Choose the ride you would like to remove by number");
-                    for (int i = 0; i < relaventDevices.size(); i++) {
-                        System.out.println((i+1) + ". " + relaventDevices.get(i).getName());
-                    }
-                    while(true){
-                        ID = input.nextInt();
-                        if(ID > 0 && ID <= relaventDevices.size())
-                            break;
-                        else
-                            System.out.println("Invalid Input, please try again");
-                    }
-                    device = relaventDevices.get(ID - 1);
-                    if(guardian.removeDevice(device, child));
-                        System.out.println("Ride removed successfully");
+                    removeRide( input,  guardian,  MySystem, child);
                     break;
 
 
@@ -194,10 +243,7 @@ public class Main {
                     break;
 
                 case 6:
-                    /*
-                     * Exit
-                     */
-
+                    System.exit(0);
                     break;
 
                 case 7:

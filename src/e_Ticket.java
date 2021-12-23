@@ -68,6 +68,20 @@ public class e_Ticket {
         return res;
     }
 
+
+    public String fancyPrint(){
+        String res = "--------eTicket--------";
+        res += "\nSerial Number: " + this.id;
+        res += "\nRides Entries: " + this.devices;
+        res += "\nCredit spent: " + this.creditSpent;
+        res += "\nCredit left: " + this.creditLeft;
+        res += "\nCredit Card number: " + this.creditCard;
+        res += "\nRegistered height: " + this.height;
+        res += "\nRegistered weight: " + this.weight;
+        res += "\nRegistered age: " + this.age;
+        return res;
+    }
+
     public void addCharge(int charge) {
         this.creditLeft += charge;
     }
