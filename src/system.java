@@ -6,6 +6,12 @@ public class system {
     ArrayList<Guardian> guardianList;
     ePark Park;
 
+    public system(String parkName) {
+        this.Park = new ePark(parkName);
+        this.systemObjects = new ArrayList<>();
+        this.guardianList = new ArrayList<>();
+    }
+
     void registerGuardian(int idNumber, int guardNum){
         Guardian g = new Guardian( idNumber,  guardNum);
         guardianList.add(g);
@@ -22,31 +28,48 @@ public class system {
         return true;
     }
 
-    e_Ticket createTicket(Guardian guardian, Child child, int creditCard){
+    e_Ticket createTicket(Guardian guardian, Child child, int creditCard,  int charge){
         e_Ticket ticket = new e_Ticket(creditCard);
+        ticket.addCharge(charge);
         child.setTicket(ticket);
         systemObjects.add((Object) ticket);
         return ticket;
-
     }
-
-
 
     void measurementsUpdate(Child child, double height, double weight){
         child.setValues(height,weight);
     }
 
 
-
-
-    Payment enterPayment(){
-        return null;
+    public ArrayList<Device> getRelevantDevices(Child child) {
+        ArrayList<Device> devices = this.Park.getDeviceList();
+        ArrayList<Device> res = new ArrayList<Device>();
+        for (int i = 0; i < devices.size(); i++) {
+            if(child.canGoOn(devices.get(i))){
+                res.add(devices.get(i));
+            }
+        }
+        return res;
     }
 
-    Child getChild(){
-        return null;
+    public ArrayList<Device> getChildsDevices(Child child) {
+        return child.getDevices();
     }
 
+    public void createDevice(int deviceCode, double price, String name, boolean isOpen, boolean isExtreme, int manufactorerCode, double weightLimit, double heightLimit, int ageLimit) {
+        Device device = new Device( deviceCode,  price,  name,  isOpen,  isExtreme,  manufactorerCode,  weightLimit,  heightLimit,  ageLimit);
+        systemObjects.add(device);
+        Park.addDevice(device);
+    }
 
+    public void showAll() {
+        for (Object obj: systemObjects ) {
+            System.out.println(obj);
+        }
+    }
 
+    public void addGuardian(Guardian guardian) {
+        guardianList.add(guardian);
+        systemObjects.add((Object) guardian);
+    }
 }

@@ -97,4 +97,12 @@ public class Device {
     public int getAgeLimit() {
         return ageLimit;
     }
+
+    @Override
+    public String toString(){
+        String res = "Device - id: " + deviceCode;
+        res += ", name: " + this.getName();
+        return res;
+
+    }
 }
