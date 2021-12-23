@@ -52,6 +52,7 @@ public class ePark {
          * return:
          * If exists a device with this deviceCode in the park - return it
          * else return null
+         *
          */
         for (Device device:this.getDeviceList())
         {
