@@ -7,16 +7,14 @@ public class Guardian {
     ArrayList<Child> children;
     String creditCompany;
 
-    public Guardian(int idNumber, int guardNum, String creditCompany) {
+    public Guardian(int idNumber, int guardNum) {
         this.idNumber = idNumber;
         this.guardNum = guardNum;
-        this.creditCompany = creditCompany;
     }
 
-    public Guardian(String creditCompany) {
+    public Guardian() {
         this.idNumber = 12345;
         this.guardNum = 1;
-        this.creditCompany = creditCompany;
     }
 
     public int getIdNumber() {
@@ -31,8 +29,10 @@ public class Guardian {
         return children.size();
     }
 
-    public void addChild(Child child){
-        children.add(child);
+    public Child registerChild(int idNumber, int age){
+        Child c = new Child( idNumber,  age);
+        children.add(c);
+        return c;
     }
 
     public void addDevice(Device device){
