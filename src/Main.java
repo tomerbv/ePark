@@ -1,10 +1,9 @@
 import java.util.Scanner;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
-        /**
-         * מחזיק אובייקט סיסטם
-         * ויוצר דרך הסיסטם את 3 המתקנים שהם דרושים
+        /*
+         *
          */
         //system MySystem = new system();
         System.out.println("Welcome to ePark !\n");
@@ -24,40 +23,40 @@ public class main {
             switch (choice) {
 
                 case 1:
-                    /**
+                    /*
                      * Register child
                      */
                     break;
 
                 case 2:
-                    /**
+                    /*
                      * Manage ticket
                      */
                     break;
 
                 case 3:
-                    /**
+                    /*
                      * Add ride
                      */
                     break;
 
 
                 case 4:
-                    /**
+                    /*
                      * Remove ride
                      */
                     break;
 
 
                 case 5:
-                    /**
+                    /*
                      *Exit park
                      */
 
                     break;
 
                 case 6:
-                    /**
+                    /*
                      * Exit
                      */
 

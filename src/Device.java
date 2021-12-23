@@ -5,12 +5,16 @@ public class Device {
     boolean isOpen;
     boolean isExtreme;
     int manufactorerCode;
+
     double weightLimit;
     double heightLimit;
     int ageLimit;
     ePark park;
 
     public Device(int deviceCode, double price, String name, boolean isOpen, boolean isExtreme, int manufactorerCode, double weightLimit, double heightLimit, int ageLimit) {
+        /**
+         *
+         */
         this.deviceCode = deviceCode;
         this.price = price;
         this.name = name;
