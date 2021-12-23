@@ -8,6 +8,27 @@ public class Device {
     double weightLimit;
     double heightLimit;
     int ageLimit;
+    ePark park;
+
+    public Device(int deviceCode, double price, String name, boolean isOpen, boolean isExtreme, int manufactorerCode, double weightLimit, double heightLimit, int ageLimit) {
+        this.deviceCode = deviceCode;
+        this.price = price;
+        this.name = name;
+        this.isOpen = isOpen;
+        this.isExtreme = isExtreme;
+        this.manufactorerCode = manufactorerCode;
+        this.weightLimit = weightLimit;
+        this.heightLimit = heightLimit;
+        this.ageLimit = ageLimit;
+    }
+
+    public ePark getPark() {
+        return park;
+    }
+
+    public void setPark(ePark park) {
+        this.park = park;
+    }
 
     public void setDeviceCode(int deviceCode) {
         this.deviceCode = deviceCode;
