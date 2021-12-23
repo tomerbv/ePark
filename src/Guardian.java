@@ -75,4 +75,13 @@ public class Guardian {
         }
         return false;
     }
+
+    public void removeChild(Child child) {
+        for (int i = 0; i < this.children.size(); i++) {
+            if(this.children.get(i).getIdNumber() == child.getIdNumber()){
+                this.children.remove(i);
+                return;
+            }
+        }
+    }
 }

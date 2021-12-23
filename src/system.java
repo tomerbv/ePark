@@ -72,4 +72,13 @@ public class system {
         guardianList.add(guardian);
         systemObjects.add((Object) guardian);
     }
+
+    public void removeChild(Child child, e_Ticket ticket) {
+        for (int i = 0; i < this.systemObjects.size(); i++) {
+            if(this.systemObjects.get(i) == child)
+                this.systemObjects.remove(i);
+            if(this.systemObjects.get(i) == ticket)
+                this.systemObjects.remove(i);
+        }
+    }
 }
