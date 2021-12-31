@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Guardian {
     int idNumber;
-
     int guardNum;
     ArrayList<Child> children;
     String creditCompany;

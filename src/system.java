@@ -24,11 +24,11 @@ public class system {
         return child;
     }
 
-    boolean isCardValid(int creditCard){
+    public boolean isCardValid(int creditCard){
         return true;
     }
 
-    e_Ticket createTicket(Guardian guardian, Child child, int creditCard,  int charge){
+    public e_Ticket createTicket(Guardian guardian, Child child, int creditCard,  int charge){
         e_Ticket ticket = new e_Ticket(creditCard);
         ticket.addCharge(charge);
         child.setTicket(ticket);

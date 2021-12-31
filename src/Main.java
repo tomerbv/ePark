@@ -255,8 +255,9 @@ public class Main {
 
                 case 6:
                     /** Exit **/
-                    for (Child c: guardian.getChildren()) {
-                        removeChild( c,  guardian,  MySystem);
+                    ArrayList<Child> children = guardian.getChildren();
+                    while(guardian.numberOfChildren() > 0){
+                        removeChild( children.get(0),  guardian,  MySystem);
                     }
                     System.exit(0);
                     break;
