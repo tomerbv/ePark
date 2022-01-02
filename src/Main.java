@@ -154,8 +154,15 @@ public class Main {
             System.out.println("5.  Exit park");
             System.out.println("6.  Exit");
 
-            choice = input.nextInt();
-            input.nextLine();
+            try {
+                choice = input.nextInt();
+                input.nextLine();
+            }
+            catch(Exception e){
+                input.next();
+                choice = 10;
+            }
+
 
             switch (choice) {
 
